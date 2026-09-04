@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddScoped<Interfaces.ITasksService, Services.TasksService>();
+builder.Services.AddSingleton<Interfaces.ITasksRepo, Repositories.TasksRepo>();
 
 var app = builder.Build();
 

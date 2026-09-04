@@ -1,0 +1,75 @@
+## .NET / ASP.NET Core
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio / VS Code
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Build artifacts / publish output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+publish/
+*.pubxml
+*.pubxml.user
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userprefs
+
+# Logs
+*.log
+logs/
+
+# Environment / secrets
+appsettings.Development.json
+appsettings.*.local.json
+.env
+*.pfx
+*.key
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# EF Core migrations working files (not the migration files themselves — keep those!)
+*.dbmdl
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Database files (if using local SQLite for dev)
+*.db
+*.db-shm
+*.db-wal

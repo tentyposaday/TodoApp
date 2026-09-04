@@ -1,6 +1,27 @@
-@TodoApp_HostAddress = http://localhost:5032
+@baseUrl = http://localhost:5032
 
-GET {{TodoApp_HostAddress}}/weatherforecast/
-Accept: application/json
+### Get all tasks
+GET {{baseUrl}}/api/Tasks
 
-###
+### Get task by id
+GET {{baseUrl}}/api/Tasks/1
+
+### Create a task
+POST {{baseUrl}}/api/Tasks
+Content-Type: application/json
+
+{
+  "name": "Buy milk"
+}
+
+### Update a task
+PUT {{baseUrl}}/api/Tasks/1
+Content-Type: application/json
+
+{
+  "name": "Buy milk and eggs"
+}
+
+### Delete a task
+DELETE {{baseUrl}}/api/Tasks/1
+
