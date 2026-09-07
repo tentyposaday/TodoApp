@@ -1,4 +1,6 @@
 using Scalar.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<Interfaces.ITasksService, Services.TasksService>();
-builder.Services.AddSingleton<Interfaces.ITasksRepo, Repositories.TasksRepo>();
+builder.Services.AddScoped<Interfaces.ITasksRepo, Repositories.TasksRepo>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

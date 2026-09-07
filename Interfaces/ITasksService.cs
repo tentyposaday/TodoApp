@@ -1,10 +1,11 @@
 using Models;
-
+using Dtos;
 namespace Interfaces;
 
 public interface ITasksService
 {
-    IEnumerable<Models.Task> GetAll();
-    Models.Task GetById(int id);
-    void Add(string title, string description);
+    List<Models.Task> GetTasks(GetTasks getTasksDto);
+    Task<Models.Task> Add(AddTask addTaskDto);
+    bool Delete(int id, int userId);
+    
 }

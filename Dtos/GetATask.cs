@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Mvc;
 namespace Dtos;
 
-public record AddTask(
-    [Required] string Title, 
-    [Required] string Description,
+public record GetATask(
+    [Required] int Id,
     [Required] int UserId
 );

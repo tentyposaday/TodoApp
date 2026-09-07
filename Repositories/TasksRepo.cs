@@ -1,5 +1,7 @@
 using Interfaces;
 using Models;
+using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace Repositories;
 
@@ -7,25 +9,40 @@ public class TasksRepo: ITasksRepo
 {
     private readonly List<Models.Task> _tasks;
     private int _nextId = 1;
+    private readonly AppDbContext _context;
 
-    public TasksRepo()
+    public TasksRepo(AppDbContext dbContext)
     {
+        _context = dbContext;
         _tasks = new List<Models.Task>();
     }
 
     public IEnumerable<Models.Task> GetAll()
     {
-        return _tasks;
+        return _context.Tasks.ToList();
     }
 
     public Models.Task GetById(int id)
     {
-        return _tasks.FirstOrDefault(t => t.Id == id);
+        return _context.Tasks.FirstOrDefault(t => t.Id == id);
     }
 
-    public void Add(Models.Task task)
+    public bool Add(Models.Task task)
     {
-        task.Id = _nextId++;
-        _tasks.Add(task);
+        _context.Tasks.Add(task);
+        _context.SaveChanges();
+        return true;
+    }
+
+    public bool Delete(int id, int UserId)
+    {
+        var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == UserId);
+        if (task != null)
+        {
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+            return true;
+        }
+        return false;
     }
 }

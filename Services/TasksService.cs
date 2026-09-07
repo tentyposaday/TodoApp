@@ -14,24 +14,31 @@ public class TasksService : ITasksService
         _tasksRepo = tasksRepo;
     }
 
-    public IEnumerable<Models.Task> GetAll()
+    public List<Models.Task> GetTasks(GetTasks getTasksDto)
     {
-        return _tasksRepo.GetAll();
+        if(getTasksDto.UserId != null)
+        {
+            return _tasksRepo.GetAll().Where(t => t.UserId == getTasksDto.UserId).ToList();
+        }
+
+        return new List<Models.Task>();
     }
 
-    public Models.Task GetById(int id)
-    {
-        return _tasksRepo.GetById(id);
-    }
-
-    public void Add(string title, string description)
+    public async Task<Models.Task> Add(AddTask addTaskDto)
     {
         var task = new Models.Task
         {
-            Name = title,
-            Description = description
+            Name = addTaskDto.Title,
+            Description = addTaskDto.Description,
+            UserId = addTaskDto.UserId
         };
 
         _tasksRepo.Add(task);
+        return task;
+    }
+
+    public bool Delete(int id, int userId)
+    {
+        return _tasksRepo.Delete(id, userId);
     }
 }

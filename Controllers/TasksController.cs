@@ -2,37 +2,52 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Interfaces;
 using Repositories;
+using Dtos;
 namespace Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TasksController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll(ITasksService tasksService)
+    private readonly ITasksService _tasksService;
+    public TasksController(ITasksService tasksService)
     {
-        return Ok(tasksService.GetAll());
+        _tasksService = tasksService;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetById(ITasksService tasksService, int id)
+    [HttpGet]
+    public IActionResult GetTasks([FromQuery] GetTasks getTasksDto)
     {
-        var task = tasksService.GetById(id);
-        if (task == null)
-        {
-            return NotFound();
-        }
-        return Ok(task);
+        var tasks = _tasksService.GetTasks(getTasksDto);
+        return Ok(tasks);
     }
     
     [HttpPost]
-    public IActionResult Add(ITasksService tasksService, [FromBody] Dtos.AddTask addTaskDto)
+    public IActionResult Add([FromBody] AddTask addTaskDto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        tasksService.Add(addTaskDto.Title, addTaskDto.Description);
-        return CreatedAtAction(nameof(GetById), new { id = tasksService.GetAll().Last().Id }, tasksService.GetAll().Last());
+        var task = _tasksService.Add(addTaskDto);
+        return CreatedAtAction(
+            nameof(GetTasks),
+            task
+        );    
+    }
+
+    [HttpPost("delete")]
+    public IActionResult Delete([FromBody] DeleteTask deleteTaskDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var result = _tasksService.Delete(deleteTaskDto.Id, deleteTaskDto.UserId);
+        if (!result)
+        {
+            return NotFound();
+        }
+        return NoContent();
     }
 }

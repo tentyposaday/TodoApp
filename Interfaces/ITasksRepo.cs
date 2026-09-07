@@ -6,5 +6,6 @@ public interface ITasksRepo
 {
     IEnumerable<Models.Task> GetAll();
     Models.Task GetById(int id);
-    void Add(Models.Task task);
+    bool Add(Models.Task task);
+    bool Delete(int id, int UserId);
 }
