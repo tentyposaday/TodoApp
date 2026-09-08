@@ -1,12 +1,10 @@
-/* namespace Models;
+namespace Models;
 
 
-public class Tocken
+public class AccessToken
 {
     public int Id { get; set; }
     public string Value { get; set; }
     public DateTime Expiration { get; set; }
     public int UserId { get; set; }
-    public User User { get; set; }
 }
-*/

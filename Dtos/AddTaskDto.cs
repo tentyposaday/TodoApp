@@ -2,7 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dtos;
 
-public record DeleteTask(
-    [Required] int Id,
+public record AddTaskDto(
+    [Required] string Title, 
+    [Required] string Description,
     [Required] int UserId
 );

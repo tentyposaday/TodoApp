@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 namespace Dtos;
 
-public record GetATask(
+public record GetATaskDto(
     [Required] int Id,
     [Required] int UserId
 );

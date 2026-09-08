@@ -22,16 +22,23 @@ public class TasksRepo: ITasksRepo
         return _context.Tasks.ToList();
     }
 
-    public Models.Task GetById(int id)
+    public Models.Task? GetById(int id)
     {
         return _context.Tasks.FirstOrDefault(t => t.Id == id);
     }
 
     public bool Add(Models.Task task)
     {
-        _context.Tasks.Add(task);
-        _context.SaveChanges();
-        return true;
+        try
+        {
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public bool Delete(int id, int UserId)

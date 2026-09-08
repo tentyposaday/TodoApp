@@ -9,4 +9,5 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Models.Task> Tasks { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 }

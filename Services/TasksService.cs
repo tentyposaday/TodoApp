@@ -14,17 +14,18 @@ public class TasksService : ITasksService
         _tasksRepo = tasksRepo;
     }
 
-    public List<Models.Task> GetTasks(GetTasks getTasksDto)
+    public ViewResultDto GetTasks(GetTasksDto getTasksDto)
     {
         if(getTasksDto.UserId != null)
         {
-            return _tasksRepo.GetAll().Where(t => t.UserId == getTasksDto.UserId).ToList();
+            var tasks = _tasksRepo.GetAll().Where(t => t.UserId == getTasksDto.UserId).ToList();
+            return new ViewResultDto(tasks, tasks.Count, "Tasks retrieved successfully.");
         }
 
-        return new List<Models.Task>();
+        return new ViewResultDto(new List<Models.Task>(), 0, "No tasks found.");
     }
 
-    public async Task<Models.Task> Add(AddTask addTaskDto)
+    public async Task<AddResultDto> Add(AddTaskDto addTaskDto)
     {
         var task = new Models.Task
         {
@@ -33,12 +34,13 @@ public class TasksService : ITasksService
             UserId = addTaskDto.UserId
         };
 
-        _tasksRepo.Add(task);
-        return task;
+        var isAdded = _tasksRepo.Add(task);
+        return new AddResultDto(isAdded, isAdded ? "Task added successfully." : "Failed to add task.");
     }
 
-    public bool Delete(int id, int userId)
+    public async Task<DeleteResultDto> Delete(int id, int userId)
     {
-        return _tasksRepo.Delete(id, userId);
+        var isDeleted = _tasksRepo.Delete(id, userId);
+        return new DeleteResultDto(isDeleted, isDeleted ? "Task deleted successfully." : "Failed to delete task.");
     }
 }

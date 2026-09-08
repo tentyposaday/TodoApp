@@ -4,8 +4,7 @@ namespace Interfaces;
 
 public interface ITasksService
 {
-    List<Models.Task> GetTasks(GetTasks getTasksDto);
-    Task<Models.Task> Add(AddTask addTaskDto);
-    bool Delete(int id, int userId);
-    
+    ViewResultDto GetTasks(GetTasksDto getTasksDto);
+    Task<AddResultDto> Add(AddTaskDto addTaskDto);
+    Task<DeleteResultDto> Delete(int id, int userId);
 }
