@@ -37,6 +37,7 @@ public class TasksRepo: ITasksRepo
         }
         catch (DbUpdateException)
         {
+            // Log failure here
             return false;
         }
     }
