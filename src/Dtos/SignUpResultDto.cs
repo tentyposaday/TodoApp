@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Dtos;
+namespace TodoApp.Dtos;
 
 public record SignUpResultDto(
     [Required] bool IsSignedUp,

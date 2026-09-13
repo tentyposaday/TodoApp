@@ -1,9 +1,9 @@
 using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Data;
+using TodoApp.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Interfaces;
-using Models;
+using TodoApp.Interfaces;
+using TodoApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddScoped<Interfaces.ITasksService, Services.TasksService>();
-builder.Services.AddScoped<Interfaces.ITasksRepo, Repositories.TasksRepo>();
-builder.Services.AddScoped<Interfaces.IRefreshTokenRepo, Repositories.RefreshTokenRepo>();
-builder.Services.AddScoped<Interfaces.IUserRepo, Repositories.UserRepo>();
-builder.Services.AddScoped<Interfaces.IAuthService, Services.AuthService>();
+builder.Services.AddScoped<TodoApp.Interfaces.ITasksService, TodoApp.Services.TasksService>();
+builder.Services.AddScoped<TodoApp.Interfaces.ITasksRepo, TodoApp.Repositories.TasksRepo>();
+builder.Services.AddScoped<TodoApp.Interfaces.IRefreshTokenRepo, TodoApp.Repositories.RefreshTokenRepo>();
+builder.Services.AddScoped<TodoApp.Interfaces.IUserRepo, TodoApp.Repositories.UserRepo>();
+builder.Services.AddScoped<TodoApp.Interfaces.IAuthService, TodoApp.Services.AuthService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));

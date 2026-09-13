@@ -1,9 +1,9 @@
-using Models;
-using Repositories;
-using Interfaces;
-using Dtos;
+using TodoApp.Models;
+using TodoApp.Repositories;
+using TodoApp.Interfaces;
+using TodoApp.Dtos;
 
-namespace Services;
+namespace TodoApp.Services;
 
 public class TasksService : ITasksService
 {

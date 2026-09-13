@@ -1,9 +1,9 @@
-using Data;
+using TodoApp.Data;
 using Microsoft.EntityFrameworkCore;
-using Models;
-using Interfaces;
+using TodoApp.Models;
+using TodoApp.Interfaces;
 
-namespace Repositories;
+namespace TodoApp.Repositories;
 
 public class RefreshTokenRepo : IRefreshTokenRepo
 {

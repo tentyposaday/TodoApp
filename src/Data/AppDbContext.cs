@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Models;
+using TodoApp.Models;
 
-namespace Data;
+namespace TodoApp.Data;
 
 public class AppDbContext : DbContext
 {

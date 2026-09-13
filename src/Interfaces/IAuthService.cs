@@ -1,7 +1,7 @@
-using Models;
-using Dtos;
+using TodoApp.Models;
+using TodoApp.Dtos;
 
-namespace Interfaces;
+namespace TodoApp.Interfaces;
 
 public interface IAuthService
 {

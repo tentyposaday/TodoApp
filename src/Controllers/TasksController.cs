@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Models;
-using Interfaces;
-using Repositories;
-using Dtos;
+using TodoApp.Models;
+using TodoApp.Interfaces;
+using TodoApp.Repositories;
+using TodoApp.Dtos;
 using System.Security.Claims;
 namespace Controllers;
 

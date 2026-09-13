@@ -1,4 +1,4 @@
-namespace Models;
+namespace TodoApp.Models;
 
 public class RefreshToken
 {

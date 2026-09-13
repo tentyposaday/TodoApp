@@ -1,7 +1,7 @@
-using Models;
-using Repositories;
-using Interfaces;
-using Dtos;
+using TodoApp.Models;
+using TodoApp.Repositories;
+using TodoApp.Interfaces;
+using TodoApp.Dtos;
 using BCrypt.Net;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Services;
+namespace TodoApp.Services;
 
 public class AuthService : IAuthService
 {

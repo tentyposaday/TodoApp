@@ -1,9 +1,9 @@
-using Interfaces;
-using Models;
+using TodoApp.Interfaces;
+using TodoApp.Models;
 using Microsoft.EntityFrameworkCore;
-using Data;
+using TodoApp.Data;
 
-namespace Repositories;
+namespace TodoApp.Repositories;
 
 public class TasksRepo: ITasksRepo
 {

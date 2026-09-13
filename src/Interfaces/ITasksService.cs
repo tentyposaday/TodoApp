@@ -1,6 +1,6 @@
-using Models;
-using Dtos;
-namespace Interfaces;
+using TodoApp.Models;
+using TodoApp.Dtos;
+namespace TodoApp.Interfaces;
 
 public interface ITasksService
 {

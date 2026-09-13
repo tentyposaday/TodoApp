@@ -1,6 +1,6 @@
-using Models;
+using TodoApp.Models;
 
-namespace Interfaces;
+namespace TodoApp.Interfaces;
 
 public interface IRefreshTokenRepo
 {

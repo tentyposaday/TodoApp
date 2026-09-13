@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Dtos;
+namespace TodoApp.Dtos;
 
 public record LoginResultDto(
     [Required] bool Success,
