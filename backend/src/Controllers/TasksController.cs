@@ -57,6 +57,6 @@ public class TasksController : ControllerBase
         {
             return NotFound(result);
         }
-        return NoContent();
+        return Ok(result);
     }
 }

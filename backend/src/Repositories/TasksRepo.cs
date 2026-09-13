@@ -7,27 +7,27 @@ namespace TodoApp.Repositories;
 
 public class TasksRepo: ITasksRepo
 {
-    private readonly List<Models.Task> _tasks;
+    private readonly List<TaskItem> _tasks;
     private int _nextId = 1;
     private readonly AppDbContext _context;
 
     public TasksRepo(AppDbContext dbContext)
     {
         _context = dbContext;
-        _tasks = new List<Models.Task>();
+        _tasks = new List<TaskItem>();
     }
 
-    public async Task<List<TodoApp.Models.Task>> GetTasksByUserId(int userId)
+    public async Task<List<TaskItem>> GetTasksByUserId(int userId)
     {
         return await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
     }
 
-    public async Task<Models.Task?> GetTaskById(int id)
+    public async Task<TaskItem?> GetTaskById(int id)
     {
         return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task<bool> AddTask(Models.Task task)
+    public async Task<bool> AddTask(TaskItem task)
     {
         try
         {

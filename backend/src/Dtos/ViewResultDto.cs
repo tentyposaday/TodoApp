@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using TodoApp.Models;
 
 namespace TodoApp.Dtos;
 
 public record ViewResultDto(
-    [Required] List<Models.Task> Tasks,
+    [Required] List<TaskItem> Tasks,
     [Required] int TotalCount,
     [Required] string Message
 );

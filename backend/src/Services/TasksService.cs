@@ -20,12 +20,12 @@ public class TasksService : ITasksService
         var tasks = await _tasksRepo.GetTasksByUserId(userId);
         return new ViewResultDto(tasks, tasks.Count, "Tasks retrieved successfully.");
         }
-        return new ViewResultDto(new List<Models.Task>(), 0, "No tasks found.");
+        return new ViewResultDto(new List<TaskItem>(), 0, "No tasks found.");
     }
 
     public async Task<AddResultDto> Add(AddTaskDto addTaskDto, int userId)
     {
-        var task = new Models.Task
+        var task = new TaskItem
         {
             Name = addTaskDto.Title,
             Description = addTaskDto.Description,
