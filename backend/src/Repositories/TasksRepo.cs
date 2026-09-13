@@ -17,37 +17,37 @@ public class TasksRepo: ITasksRepo
         _tasks = new List<Models.Task>();
     }
 
-    public IEnumerable<TodoApp.Models.Task> GetTasksByUserId(int userId)
+    public async Task<List<TodoApp.Models.Task>> GetTasksByUserId(int userId)
     {
-        return _context.Tasks.Where(t => t.UserId == userId).ToList();
+        return await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
     }
 
-    public Models.Task? GetTaskById(int id)
+    public async Task<Models.Task?> GetTaskById(int id)
     {
-        return _context.Tasks.FirstOrDefault(t => t.Id == id);
+        return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public bool AddTask(Models.Task task)
+    public async Task<bool> AddTask(Models.Task task)
     {
         try
         {
             _context.Tasks.Add(task);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
-        catch (Exception)
+        catch (DbUpdateException)
         {
             return false;
         }
     }
 
-    public bool DeleteTask(int id, int UserId)
+    public async Task<bool> DeleteTask(int id, int UserId)
     {
-        var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == UserId);
+        var task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id && t.UserId == UserId);
         if (task != null)
         {
             _context.Tasks.Remove(task);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return true;
         }
         return false;

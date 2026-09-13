@@ -19,10 +19,10 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetTasks([FromQuery] GetTasksDto getTasksDto)
+    public async Task<IActionResult> GetTasks([FromQuery] GetTasksDto getTasksDto)
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var tasks = _tasksService.GetTasks(getTasksDto, userId);
+        var tasks =  await _tasksService.GetTasks(getTasksDto, userId);
         if(tasks.TotalCount == 0)
         {
             return NotFound(tasks);
@@ -42,12 +42,9 @@ public class TasksController : ControllerBase
         var task = await _tasksService.Add(addTaskDto, userId);
         if(task.IsAdded == false)
         {
-            return BadRequest(task);
+            return BadRequest(task.Message);
         }
-        return CreatedAtAction(
-            nameof(GetTasks),
-            task
-        );    
+        return StatusCode(StatusCodes.Status201Created, task);  
     }
 
     [HttpPost("delete")]
