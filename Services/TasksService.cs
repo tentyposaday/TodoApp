@@ -14,24 +14,24 @@ public class TasksService : ITasksService
         _tasksRepo = tasksRepo;
     }
 
-    public ViewResultDto GetTasks(GetTasksDto getTasksDto)
+    public ViewResultDto GetTasks(GetTasksDto getTasksDto, int userId)
     {
-        if(getTasksDto.UserId != null)
+        if(userId != null)
         {
-            var tasks = _tasksRepo.GetAll().Where(t => t.UserId == getTasksDto.UserId).ToList();
+            var tasks = _tasksRepo.GetAll().Where(t => t.UserId == userId).ToList();
             return new ViewResultDto(tasks, tasks.Count, "Tasks retrieved successfully.");
         }
 
         return new ViewResultDto(new List<Models.Task>(), 0, "No tasks found.");
     }
 
-    public async Task<AddResultDto> Add(AddTaskDto addTaskDto)
+    public async Task<AddResultDto> Add(AddTaskDto addTaskDto, int userId)
     {
         var task = new Models.Task
         {
             Name = addTaskDto.Title,
             Description = addTaskDto.Description,
-            UserId = addTaskDto.UserId
+            UserId = userId
         };
 
         var isAdded = _tasksRepo.Add(task);

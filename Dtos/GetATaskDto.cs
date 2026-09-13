@@ -3,6 +3,5 @@ using Microsoft.AspNetCore.Mvc;
 namespace Dtos;
 
 public record GetATaskDto(
-    [Required] int Id,
-    [Required] int UserId
+    [Required] int Id
 );

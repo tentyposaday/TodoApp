@@ -5,6 +5,6 @@ namespace Interfaces;
 public interface IRefreshTokenRepo
 {
     Task<RefreshToken?> GetRefreshToken(string value);
-    Task<RefreshToken> CreateRefreshToken(int userId);
+    Task<bool> CreateRefreshToken(RefreshToken refreshToken);
     Task<RefreshToken?> DeleteRefreshToken(int id);
 }

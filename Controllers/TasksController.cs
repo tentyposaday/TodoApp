@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Models;
 using Interfaces;
 using Repositories;
 using Dtos;
+using System.Security.Claims;
 namespace Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class TasksController : ControllerBase
 {
     private readonly ITasksService _tasksService;
@@ -18,7 +21,8 @@ public class TasksController : ControllerBase
     [HttpGet]
     public IActionResult GetTasks([FromQuery] GetTasksDto getTasksDto)
     {
-        var tasks = _tasksService.GetTasks(getTasksDto);
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var tasks = _tasksService.GetTasks(getTasksDto, userId);
         if(tasks.TotalCount == 0)
         {
             return NotFound(tasks);
@@ -33,7 +37,9 @@ public class TasksController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        var task = await _tasksService.Add(addTaskDto);
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        var task = await _tasksService.Add(addTaskDto, userId);
         if(task.IsAdded == false)
         {
             return BadRequest(task);
@@ -51,7 +57,9 @@ public class TasksController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        var result = await _tasksService.Delete(deleteTaskDto.Id, deleteTaskDto.UserId);
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        
+        var result = await _tasksService.Delete(deleteTaskDto.Id, userId);
         if (!result.IsDeleted)
         {
             return NotFound(result);

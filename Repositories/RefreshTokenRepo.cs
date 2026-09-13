@@ -20,17 +20,11 @@ public class RefreshTokenRepo : IRefreshTokenRepo
         return token;
     }
 
-    public async Task<RefreshToken> CreateRefreshToken(int userId)
+    public async Task<bool> CreateRefreshToken(RefreshToken refreshToken)
     {
-        var token = new RefreshToken
-        {
-            Value = Guid.NewGuid().ToString(), // Todo : Implement a proper token generation mechanism
-            UserId = userId,
-            Expiration = DateTime.UtcNow.AddDays(7) // For now 7 days expiration, can be changed later
-        };
-        _context.RefreshTokens.Add(token);
+        _context.RefreshTokens.Add(refreshToken);
         await _context.SaveChangesAsync();
-        return token;
+        return true;
     }
 
     public async Task<RefreshToken?> DeleteRefreshToken(int id)
