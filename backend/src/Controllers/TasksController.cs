@@ -47,16 +47,12 @@ public class TasksController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, task);  
     }
 
-    [HttpPost("delete")]
-    public async Task<IActionResult> Delete([FromBody] DeleteTaskDto deleteTaskDto)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         
-        var result = await _tasksService.Delete(deleteTaskDto.Id, userId);
+        var result = await _tasksService.Delete(id, userId);
         if (!result.IsDeleted)
         {
             return NotFound(result);
