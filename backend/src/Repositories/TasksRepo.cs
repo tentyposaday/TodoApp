@@ -17,17 +17,17 @@ public class TasksRepo: ITasksRepo
         _tasks = new List<Models.Task>();
     }
 
-    public IEnumerable<Models.Task> GetAll()
+    public IEnumerable<TodoApp.Models.Task> GetTasksByUserId(int userId)
     {
-        return _context.Tasks.ToList();
+        return _context.Tasks.Where(t => t.UserId == userId).ToList();
     }
 
-    public Models.Task? GetById(int id)
+    public Models.Task? GetTaskById(int id)
     {
         return _context.Tasks.FirstOrDefault(t => t.Id == id);
     }
 
-    public bool Add(Models.Task task)
+    public bool AddTask(Models.Task task)
     {
         try
         {
@@ -41,7 +41,7 @@ public class TasksRepo: ITasksRepo
         }
     }
 
-    public bool Delete(int id, int UserId)
+    public bool DeleteTask(int id, int UserId)
     {
         var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == UserId);
         if (task != null)

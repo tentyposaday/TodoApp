@@ -18,7 +18,7 @@ public class TasksService : ITasksService
     {
         if(userId != null)
         {
-            var tasks = _tasksRepo.GetAll().Where(t => t.UserId == userId).ToList();
+            var tasks = _tasksRepo.GetTasksByUserId(userId).ToList();
             return new ViewResultDto(tasks, tasks.Count, "Tasks retrieved successfully.");
         }
 
@@ -34,13 +34,13 @@ public class TasksService : ITasksService
             UserId = userId
         };
 
-        var isAdded = _tasksRepo.Add(task);
+        var isAdded = _tasksRepo.AddTask(task);
         return new AddResultDto(isAdded, isAdded ? "Task added successfully." : "Failed to add task.");
     }
 
     public async Task<DeleteResultDto> Delete(int id, int userId)
     {
-        var isDeleted = _tasksRepo.Delete(id, userId);
+        var isDeleted = _tasksRepo.DeleteTask(id, userId);
         return new DeleteResultDto(isDeleted, isDeleted ? "Task deleted successfully." : "Failed to delete task.");
     }
 }
