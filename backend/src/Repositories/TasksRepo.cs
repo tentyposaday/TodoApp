@@ -22,11 +22,6 @@ public class TasksRepo: ITasksRepo
         return await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
     }
 
-    public async Task<TaskItem?> GetTaskById(int id)
-    {
-        return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
-    }
-
     public async Task<bool> AddTask(TaskItem task)
     {
         try

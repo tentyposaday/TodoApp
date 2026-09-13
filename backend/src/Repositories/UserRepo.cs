@@ -16,7 +16,6 @@ public class UserRepo : IUserRepo
 
     public async Task<User?> GetUserByEmail(string email)
     {
-        Console.WriteLine($"Searching for user with email: {email}"); // Debugging line
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         return user;
     }
