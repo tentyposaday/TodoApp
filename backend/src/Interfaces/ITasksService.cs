@@ -1,5 +1,6 @@
 using TodoApp.Models;
-using TodoApp.Dtos;
+using TodoApp.Dtos.Request;
+using TodoApp.Dtos.Response;
 namespace TodoApp.Interfaces;
 
 public interface ITasksService

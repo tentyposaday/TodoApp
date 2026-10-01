@@ -1,13 +1,21 @@
 namespace TodoApp.Models;
 
-public class TaskItem
+public class GroupTaskItem
 {
     public int Id { get; set; }
-    public int UserId { get; set; }
+    public List<int> AssignedToUserIds { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public int GroupId { get; set; }
     public TaskStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public DateTime? DueDate { get; set; }
+}
+
+public enum TaskStatus
+{
+    NotStarted,
+    InProgress,
+    Completed
 }

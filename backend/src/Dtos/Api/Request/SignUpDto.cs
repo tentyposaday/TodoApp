@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TodoApp.Dtos;
+namespace TodoApp.Dtos.Request;
 
 public record SignUpDto(
     [Required] string Email,

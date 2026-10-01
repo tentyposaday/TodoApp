@@ -1,7 +1,8 @@
 using TodoApp.Models;
 using TodoApp.Repositories;
 using TodoApp.Interfaces;
-using TodoApp.Dtos;
+using TodoApp.Dtos.Request;
+using TodoApp.Dtos.Response;
 using BCrypt.Net;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

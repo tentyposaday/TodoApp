@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+namespace TodoApp.Dtos.Request;
 
-namespace TodoApp.Dtos;
-
-public record DeleteTaskDto(
+public record GetATaskDto(
     [Required] int Id
 );

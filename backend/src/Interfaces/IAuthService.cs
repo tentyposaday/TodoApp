@@ -1,5 +1,6 @@
 using TodoApp.Models;
-using TodoApp.Dtos;
+using TodoApp.Dtos.Response;
+using TodoApp.Dtos.Request;
 
 namespace TodoApp.Interfaces;
 

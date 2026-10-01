@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using TodoApp.Models;
 
-namespace TodoApp.Dtos;
+namespace TodoApp.Dtos.Response;
 
 public record ViewResultDto(
     [Required] List<TaskItem> Tasks,

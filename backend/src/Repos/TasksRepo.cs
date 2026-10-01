@@ -7,14 +7,11 @@ namespace TodoApp.Repositories;
 
 public class TasksRepo: ITasksRepo
 {
-    private readonly List<TaskItem> _tasks;
-    private int _nextId = 1;
     private readonly AppDbContext _context;
 
     public TasksRepo(AppDbContext dbContext)
     {
         _context = dbContext;
-        _tasks = new List<TaskItem>();
     }
 
     public async Task<List<TaskItem>> GetTasksByUserId(int userId)
@@ -48,4 +45,22 @@ public class TasksRepo: ITasksRepo
         }
         return false;
     }
+
+    public async Task<List<GroupTaskItem>> GetTasksByGroupId(int groupId)
+    {
+        throw new NotImplementedException();
+    }
+    public async Task<bool> AddGroupTask(GroupTaskItem task)
+    {
+        throw new NotImplementedException();
+    }
+    public async Task<bool> DeleteGroupTask(int id)
+    {
+        throw new NotImplementedException();
+    }
+    public async Task<GroupTaskItem> AssignUserToGroupTask(int grouptaskId, int userId)
+    {
+        throw new NotImplementedException();
+    }
+
 }
